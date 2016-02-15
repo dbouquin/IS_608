@@ -37,8 +37,9 @@ ggsave('q1.png', height = 11, width = 8.5)
 counts <- as.data.frame(table(inc5000$State))
 colnames(counts) <- c("State", "Count")
 head(counts) # check structure
-sort(counts$Count, TRUE)[3] # kind of hacky I know...
-filter(counts, Count == 311)
+x <- sort(counts$Count, TRUE)[3] 
+filter(counts, Count == x)
+
 # pull out only NY data from orinal dataset and remove incomplete cases
 ny_data <- filter(inc5000, State == "NY")
 ny_data <- ny_data[complete.cases(ny_data),]
