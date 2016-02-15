@@ -125,9 +125,8 @@ head(counts) # check structure</code></pre>
 ## 4    AZ   100
 ## 5    CA   701
 ## 6    CO   134</code></pre>
-<pre class="r"><code>sort(counts$Count, TRUE)[3] # kind of hacky I know...</code></pre>
-<pre><code>## [1] 311</code></pre>
-<pre class="r"><code>filter(counts, Count == 311)</code></pre>
+<pre class="r"><code>x &lt;- sort(counts$Count, TRUE)[3] 
+filter(counts, Count == x)</code></pre>
 <pre><code>##   State Count
 ## 1    NY   311</code></pre>
 <pre class="r"><code># pull out only NY data from orinal dataset and remove incomplete cases
