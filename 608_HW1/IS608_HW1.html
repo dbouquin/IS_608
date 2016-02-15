@@ -102,9 +102,7 @@ library(dplyr)</code></pre>
 ## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(RColorBrewer)
-
-c &lt;- ggplot(inc5000, aes(factor(State))) + geom_bar(fill=&quot;#009E73&quot;)
+<pre class="r"><code>c &lt;- ggplot(inc5000, aes(factor(State))) + geom_bar(fill=&quot;#009E73&quot;)
 c &lt;- c + coord_flip()
 c &lt;- c + theme(text = element_text(size=12), axis.title=element_text(size=14,face=&quot;bold&quot;)) 
 c &lt;- c + labs(title = &quot;Number of Companies by State&quot;, x= &quot;State&quot;, y= &quot;Count&quot;)
