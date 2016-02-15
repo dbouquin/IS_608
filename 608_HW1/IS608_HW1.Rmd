@@ -20,7 +20,6 @@ str(inc5000)
 ```{r fig.width=8.5, fig.height=11}
 library(ggplot2)
 library(dplyr)
-library(RColorBrewer)
 
 c <- ggplot(inc5000, aes(factor(State))) + geom_bar(fill="#009E73")
 c <- c + coord_flip()
