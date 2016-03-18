@@ -1,0 +1,191 @@
+---
+title: "IS608_HW2"
+author: "Daina Bouquin"
+date: "March 4, 2016"
+output: html_document
+---
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(devtools)
+devtools::install_github("hadley/bigvis")
+library(bigvis)
+library(RColorBrewer)
+```
+I have provided you with data about every tax lot in NYC, in a zip file. Please download it from [here](http://www.nyc.gov/html/dcp/html/bytes/dwn_pluto_mappluto.shtml). You will need to combine the data from each boro into one file called ‘all_PLUTO_data.R’ in order to complete this assignment.
+```{r, warning=FALSE, message=FALSE}
+# The files are larger than the recommended file size for GitHub and are therefore accessed locally
+bk <- read.csv('BK.csv', header=TRUE) # Brooklyn
+bx <- read.csv('BX.csv', header=TRUE) # The Bronx
+mn <- read.csv('Mn.csv', header=TRUE) # Manhattan
+qn <- read.csv('QN.csv', header=TRUE) # Queens
+si <- read.csv('SI.csv', header=TRUE) # Statan Island
+
+# Merge datasets by row
+all_pluto <- rbind(bk,bx,mn,qn,si)
+table(all_pluto$BoroCode) 
+
+# Create a file containing all of the merged data
+write.csv(all_pluto, "all_PLUTO_data.csv")
+```
+####Questions:   
+1. After a few building collapses, the City of New York is going to begin investigating older buildings for safety. However, the city has a limited number of inspectors, and wants to find a ‘cut-off’ date before most city buildings were constructed. Build a graph to help the city determine __when most buildings were constructed__. Is there anything in the results that causes you to question the accuracy of the data? (note: only look at buildings built since 1850)    
+```{r, warning=FALSE, message=FALSE}
+# Read in the newly created CSV
+all_pluto <- read.csv('all_PLUTO_data.csv')
+# check out a summary of the dates
+summary(all_pluto$YearBuilt) 
+# How many == zero?? When were these built? Also, 2040??
+count(filter(all_pluto, YearBuilt== 0)) 
+# nearly 45,000 with potentially unknown date. This makes me question the accuracy of the data
+# there's also 1 building with a build date far in the future, which is strange. 
+count(filter(all_pluto, YearBuilt> 2016)) 
+# Remove strange dates as they will also impact the binning
+sub_all_pluto <- subset(all_pluto, YearBuilt != 0)
+sub_all_pluto <- subset(sub_all_pluto, YearBuilt <= 2016)
+summary(sub_all_pluto$YearBuilt)
+
+# subset out the buildings built since 1850
+post_1850 <- subset(sub_all_pluto, YearBuilt > 1850)
+# use condense 
+c_post_1850 <- condense(bin(post_1850$YearBuilt, 10))
+
+# Figure out when most were built
+# "when most buildings were constructed" == more than half of them were built. 
+half_built <- sum(c_post_1850$.count)/2
+half_built # count that must be surpassed
+
+# Create columm for cumulative sum
+cs_post_1850 <- within(c_post_1850, cumulative_sum <- cumsum(.count))
+# find years where more than half of the buildings had been built
+half_built_years <- filter(cs_post_1850, cumulative_sum > half_built)
+cut_off <- min(half_built_years[1]) # 1934.5 is the 'cut off'
+
+# make a plot showing when most buildings were constructed
+q1_a <- autoplot(c_post_1850) +
+  labs(title="Buildings Built Annually Since 1850") +
+  geom_vline(aes(xintercept = cut_off), colour="red") +
+  annotate("text", x = 1945, y = 150000, label = cut_off, colour="red", size = 4) +
+  labs(title="Count of Buildings Built Annually in NYC from 1850 Forward", x = "Year", y= "Count")
+
+q1_a
+
+ggsave("q1_a.png", width = 7.5, height=5.5)
+
+# Compare the autoplot with a plot showing cumulative sum
+q1_b <- ggplot(cs_post_1850, aes(x=post_1850.YearBuilt, y=cumulative_sum, group=1)) +
+  geom_line() +
+  geom_vline(aes(xintercept = cut_off), colour="red") +
+  annotate("text", x = 1945, y = 85000, label = cut_off, colour="red", size =3.5) +
+  labs(title="Cumulative Sum of Buildings Built Annually in NYC from 1850 Forward", x = "Year", y= "Cumulative Sum")
+
+q1_b
+
+ggsave("q1_b.png", width = 7.5, height=5.5)
+```
+   
+2. The city is particularly worried about buildings that were unusually tall when they were built, since best-practices for safety hadn’t yet been determined. Create a graph that shows how many buildings of a certain number of floors were built in each year (note: you may want to use a log scale for the number of buildings). It should be clear when 20-story buildings, 30-story buildings, and 40-story buildings were first built in large numbers.   
+
+```{r, warning=FALSE, message=FALSE}
+# aggregate counts by year and number of floors
+year_floors <- plyr::count(post_1850, vars = c("NumFloors", "YearBuilt"))
+# Add a column for rounded tens of stories
+stories <- round(year_floors$NumFloors, -1)
+year_floors <- cbind(year_floors, stories)
+# Check out the structure of the date
+head(year_floors[year_floors$NumFloors > 70,])
+
+# Subset- we only want tall buildings.
+# 20-70 story buildings
+tall <- year_floors[10 < year_floors$stories & year_floors$stories <= 70 & year_floors$freq > 0,]
+
+# Create a plot with color-blind friendly tones
+q2 <- ggplot(tall, aes(x=YearBuilt, y=freq, color=freq)) + 
+  geom_point() + 
+  scale_y_log10() + 
+  scale_color_continuous() +
+  facet_wrap(~ stories) + 
+  labs(title="N-Story Buildings Built By Year") +
+  scale_colour_gradient(high = "#E69F00", low = "#009E73") +
+  theme(axis.ticks=element_blank(),
+                 axis.text.x=element_text(angle=60,hjust=1),
+                 panel.border = element_rect(color="light gray", fill=NA),
+                 panel.background=element_rect(fill="#ffffff"),
+                 panel.grid.major.y=element_line(color="white", size=0.5),
+                 panel.grid.major.x=element_line(color="white", size=0.5))
+
+q2
+
+ggsave("q2.png", width = 8, height=5.5)
+```
+   
+3. Your boss suspects that buildings constructed during the US’s involvement in World
+War II (1941-1945) are more poorly constructed than those before and after the way
+due to the high cost of materials during those years. She thinks that, if you calculate
+assessed value per floor, you will see lower values for buildings at that time vs
+before or after. Construct a chart/graph to see if she’s right. 
+```{r, warning=FALSE, message=FALSE}
+# Assessed value per floor around WWII.
+# Subset out data from WWII +/- 5 years
+WWIIish <- subset(all_pluto, 1936 < all_pluto$YearBuilt & all_pluto$YearBuilt < 1950 & all_pluto$NumFloors > 0)
+
+# Calculate the assessed value per floor without factoring in AssessLand -- this may have nothing to do with building materials
+value_floor <- (WWIIish$AssessTot - WWIIish$AssessLand)/ WWIIish$NumFloors
+WWIIish <- cbind(WWIIish, value_floor)
+head(WWIIish$value_floor)
+
+# Get the median value per floor by year. May be more appropriate than mean.
+med_value_floor_year <- plyr::ddply(WWIIish, "YearBuilt", plyr::summarise, med_value_floor = median(value_floor))
+
+# Repeat this process for the 10 years prior to and 10 years after the WWII-ish years
+# Prior to WWII years
+pre_WWII <- subset(all_pluto, 1926 < all_pluto$YearBuilt & all_pluto$YearBuilt < 1937 & all_pluto$NumFloors > 0)
+# value by floor
+value_floor2 <- (pre_WWII$AssessTot - pre_WWII$AssessLand)/ pre_WWII$NumFloors
+pre_WWII <- cbind(pre_WWII, value_floor2)
+head(pre_WWII$value_floor)
+# median value per floor by year.
+med_value_floor_year2 <- plyr::ddply(pre_WWII, "YearBuilt", plyr::summarise, med_value_floor2 = median(value_floor2))
+
+# After WWII years
+post_WWII <- subset(all_pluto, 1949 < all_pluto$YearBuilt & all_pluto$YearBuilt < 1960 & all_pluto$NumFloors > 0)
+# value by floor
+value_floor3 <- (post_WWII$AssessTot - post_WWII$AssessLand)/ post_WWII$NumFloors
+post_WWII <- cbind(post_WWII, value_floor3)
+head(post_WWII$value_floor)
+# median value per floor by year.
+med_value_floor_year3 <- plyr::ddply(post_WWII, "YearBuilt", plyr::summarise, med_value_floor3 = median(value_floor3))
+
+# Bind the data together by row
+colnames(med_value_floor_year) <- c("YearBuilt", "med_value_floor")
+colnames(med_value_floor_year2) <- c("YearBuilt", "med_value_floor")
+colnames(med_value_floor_year3) <- c("YearBuilt", "med_value_floor")
+value_data <- rbind(med_value_floor_year2, med_value_floor_year, med_value_floor_year3)
+
+# add another column for categories
+value_data$Era <- c(rep("Pre-WWII",10),rep("Around WWII", 13), rep("Post-WWII",10))
+
+# clean up for plotting
+value_data$YearBuilt <- as.factor(value_data$YearBuilt)
+value_data$med_value_floor <- round(value_data$med_value_floor,2)
+
+str(value_data)
+
+q3 <- ggplot(value_data, aes(x=YearBuilt, y=med_value_floor, fill=Era)) +
+  geom_bar(stat="identity") +
+  scale_fill_brewer(palette = "Dark2") +
+  labs(title="Median Value per Building Floor By Year", x= "Year", y= "Median Value in Dollars") +
+  theme(axis.ticks=element_blank(),
+                 axis.text.x=element_text(angle=60,hjust=1),
+                 panel.border = element_rect(color="light gray", fill=NA),
+                 panel.background=element_rect(fill="gray95"),
+                 panel.grid.major.y=element_line(color="white", size=0.5),
+                 panel.grid.major.x=element_line(color="white", size=0.5))
+q3
+
+ggsave("q3.png", width = 8, height=5.5)
+
+```
+There doesn't seem to be an obvious lower value per floor for buildings built in the 13 years surrounding WWII, there does though seem to be generally lower medial value per floor for building built around WWII and the depression.
+     
