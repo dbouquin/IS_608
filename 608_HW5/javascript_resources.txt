@@ -1,0 +1,13 @@
+Adobe's JS Tutorial
+very basic beginner intro
+http://www.adobe.com/devnet/archive/html5/articles/intro-to-javascript-for-the-total-beginner.html
+
+Mike Bostock's Project Page
+Some inspiration to get you stoked for working with D3!
+My favorite is http://bost.ocks.org/mike/nations/ (hint: mouse over the date)
+https://bost.ocks.org/mike/
+
+Crockford's JS intro
+Intro to the language from a master.
+Slightly dated but a good tour of some of js's idiosyncrasies.
+http://javascript.crockford.com/survey.html

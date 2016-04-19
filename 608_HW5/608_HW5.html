@@ -1,0 +1,81 @@
+<html>
+<!-- form to enter a string-->
+<body>
+
+<h3>1. Create a function to reverse any word that you type in.</h3>
+
+<p>
+<form name='ReverseForm'>
+    <input type="text" size="12" name='raw'>
+    <input type="button" value="Click to Reverse" onClick=print_result1()>
+</form>
+</p>
+
+<!-- create a div to display the result-->
+<div id="Q1_answer"></div>
+
+<!-- two functions, one to reverse the string, one to print the string onClick -->
+<script type="text/javascript">
+function reverser(string){
+  var output = '';
+    output = string.split('').reverse().join('');
+    return output
+};
+
+function print_result1(){
+    var target = document.getElementById('Q1_answer');
+    target.innerHTML = reverser(document.ReverseForm.raw.value);
+};
+</script>
+
+<br><br>
+<hr>
+<br><br>
+
+<h3>2. Create a function that takes an input number, and prints a table with the first 20 multiples of the number, in order 5x4.</h3>
+
+<!-- form to enter a number-->
+<p>
+<form name='m20Table'>
+    <input type="number" name='raw2'>
+    <input type="button" value="Click to Create Table" onClick=print_result2()>
+</form>
+</p>
+
+<!-- create a div to display the second result-->
+<div id="Q2_answer"></div>
+
+<!-- functions-->
+<script type="text/javascript">
+
+<!-- creates an array of multiples-->
+function multiples(count){
+    q2Array = [];
+    for (i = 1; i <= count; i++) {q2Array.push(document.m20Table.raw2.value * (1 * i))};
+    return q2Array
+}
+
+<!-- ref: http://stackoverflow.com/questions/15164655/generate-html-table-from-2d-javascript-array -->
+<!-- create a table from an array -->
+
+function tableMake(inputArray){
+    var elements = inputArray.length;
+    var outHTML = '<table>';
+    for (i = 0; i < elements; i++){
+        if (i % 4 ==0){outHTML= outHTML +'<tr>'};
+        outHTML = outHTML + '<td>'+ inputArray[i]+ '</td>';
+        if (i % 4 ==4-1){outHTML = outHTML +'</tr>'};
+    };
+    outHTML = outHTML + '</table>';
+    return outHTML
+};
+
+function print_result2(){
+  var target = document.getElementById('Q2_answer');
+  target.innerHTML = tableMake(multiples(20));
+};
+</script>
+
+
+</body>
+</html>
