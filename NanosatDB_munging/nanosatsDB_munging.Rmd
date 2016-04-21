@@ -23,4 +23,7 @@ all_sats_data <- do.call("rbind", lapply(filenames, read.csv, header = FALSE))
 colnames(all_sats_data) <- c("Mission_Name", "Organization", "Organization_Type", "Nation", "Sat_Type", "Launch_Year", "Rocket", "Orbit", "Mission_Type")
 
 write.csv(all_sats_data, "all_sats.csv")
+
+# still need to tackle the dates...
+str(all_sats_data)
 ```
