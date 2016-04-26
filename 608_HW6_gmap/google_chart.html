@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <p>There have been 851 small satellites with origins in the United States, but what about the rest of the world?</p>
+    <p>Scroll over a country to see how many small satellites came from there</p>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+google.charts.load('current', {'packages':['geochart']});
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Sats'],
+          ['Austria', 6],
+          ['Belgium', 9],
+          ['Brazil', 11],
+          ['Bulgaria', 4],
+          ['Chile', 1],
+          ['China', 31],
+          ['Columbia', 3],
+          ['CZ', 5],
+          ['Denmark', 13],
+          ['Dubai', 1],
+          ['Ecuador', 2],
+          ['Egypt', 1],
+          ['Estonia', 2],
+          ['Ethiopia', 1],
+          ['Finland', 4],
+          ['France', 21],
+          ['Germany', 31],
+          ['Greece', 2],
+          ['Guatemala', 1],
+          ['Hungary', 3],
+          ['India', 15],
+          ['Isreal', 7],
+          ['Italy', 16],
+          ['Iraq', 1],
+          ['Japan', 38],
+          ['Jordan', 1],
+          ['Kazakhstan', 1],
+          ['Latvia', 1],
+          ['Lithuania', 4],
+          ['Malasia', 2],
+          ['Mexico', 2],
+          ['Netherlands', 6],
+          ['Norway', 8],
+          ['Pakistan', 3],
+          ['Peru', 6],
+          ['Poland', 5],
+          ['Portugal', 1],
+          ['Romania', 3],
+          ['Russia', 8],
+          ['Singapore', 9],
+          ['Slovakia', 1],
+          ['South Africa', 6],
+          ['South Korea', 12],
+          ['Spain', 13],
+          ['Sudan', 1],
+          ['Sweden', 6],
+          ['Switzerland', 6],
+          ['Taiwan', 8],
+          ['Thailand', 1],
+          ['Tunisia', 1],
+          ['Turkey', 4],
+          ['United Kingdom', 21],
+          ['Ukraine', 4],
+          ['Uruguay', 1],
+          ['Vietnam', 4]
+        ]);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
