@@ -2,6 +2,7 @@
   <head>
     <p>There have been 851 small satellites with origins in the United States, but what about the rest of the world?</p>
     <p>Scroll over a country to see how many small satellites came from there</p>
+  </head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -69,14 +70,14 @@ google.charts.load('current', {'packages':['geochart']});
           ['Vietnam', 4]
         ]);
 
-        var options = {};
+        var options = {colorAxis: {colors: ["#009E73","#000080"]},
+      };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
         chart.draw(data, options);
       }
     </script>
-  </head>
   <body>
     <div id="regions_div" style="width: 900px; height: 500px;"></div>
   </body>
