@@ -1,0 +1,86 @@
+---
+title: "all_sats_munging2"
+author: "Daina Bouquin"
+date: "May 14, 2016"
+output: html_document
+---
+
+# Munging step 2: add needed categories, alter data types, and subset as needed for plotting
+   
+Country-continent pairing data came from [DataHub](https://datahub.io/dataset/countries-continents/resource/aa08c34c-57e8-4e15-bd36-969bee26aba5). Extra columns stripped before upload to GitHub using Open Office.   
+
+```{r}
+# read in the all_sats.csv file from my GitHub repo
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/all_sats.csv", "all_sats.csv", method="curl")
+all_sats <- read.csv("all_sats.csv", na.strings = "NA")
+
+str(all_sats$Nation)
+
+# read in the continent-country pairing file from my GitHub repo
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/Countries-Continents.csv", "Countries-Continents.csv", method="curl")
+country_cont <- read.csv("Countries-Continents.csv", na.strings = "NA")
+
+str(country_cont$Country)
+
+# create a region column in the all_sats dataframe
+# reference: http://stackoverflow.com/questions/12307254/using-plyr-to-match-column-values-in-two-data-frames
+
+all_sats$region <- country_cont$Continent[ match(all_sats$Nation, country_cont$Country)]
+
+str(all_sats)
+
+# Subset from the data only records that contain a launch date (TBD and cancelled launches will not be plotted)
+# Use logical indexing
+all_sats <- all_sats[!(all_sats$Launch_Year=="TBD" | all_sats$Launch_Year=="x_cancelled"),]
+
+# Alter the data structure of Launch_Year
+# replace slashes using gsub()
+all_sats$Launch_Year <- gsub("/", "-", all_sats$Launch_Year)
+
+str(all_sats$Launch_Year)
+
+# this file will be used for the remainder of the plotting
+# pushed to GitHub for future use
+write.csv(all_sats,"clean_all_sats.csv")
+
+# All I'm interested in is the Year of the launch, so I'm going to create a new column showing just the year. (The date format is still off mm-dd-yy)
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/clean_all_sats.csv", "clean_all_sats.csv", method="curl")
+clean_sats <- read.csv("clean_all_sats.csv", na.strings = "NA")
+
+# Created a toy example for help on StackOverflow
+# http://stackoverflow.com/questions/37231241/new-column-from-non-standard-date-factor-in-r/37231268#37231268
+
+org <- c("a","b","c","d")
+country <- c("1","2","3","4")
+date <- c("01-09-14","01-10-07","11-30-99","10-31-12")
+toy <- data.frame(cbind(org,country,date))
+toy
+
+# regex solution
+v1 <- sub(".*-", "", toy$date)
+toy$Year <- ifelse(as.numeric(v1) > 50, paste0("19", v1), paste0(20, v1))
+toy$Year
+toy
+
+# datetime solution
+transform(toy,Year=format(strptime(date,"%m-%d-%y"),"%Y"))
+
+# apply solution to whole dataset
+clean_sats$Year <- transform(clean_sats,Year=format(strptime(Launch_Year,"%m-%d-%y"),"%Y"))
+
+# regex solution would look like this: 
+# v1 <- sub(".*-", "", clean_sats$Launch_Year)
+# clean_sats$Year <- ifelse(as.numeric(v1) > 50, paste0("19", v1), paste0(20, v1))
+
+# Now I'll drop the columns I no longer need and rename them
+
+clean_sats[1:2] <- list(NULL)
+clean_sats[6] <- list(NULL)
+clean_sats[10:21] <- list(NULL)
+
+# create the final file
+final_sats <- clean_sats
+write.csv(final_sats, "final_sats.csv")
+
+# minor edits to "region" column done with Open Office - changed any NAs to appropriate region name
+```
