@@ -5,7 +5,9 @@ date: "April 20, 2016"
 output: html_document
 ---
 
-I pulled data from Radius Space's [Nanosatellite Database](www.nanosats.eu) on April 20, 2016. To do so, I selected the data from the multipage database and transfered it to Open Office. After cleaning up the formatting, I saved the resulting files to a CSV format. I used Open Office because there was no simple alternative for cleaning up the files quickly. The Nanosatellite Database has no export features and was proving difficult to scrape.
+# Data clean up step 1: combine manually extracted data into single usable file
+
+I pulled data from Radius Space's [Nanosatellite Database](www.nanosats.eu) on April 20, 2016. To do so, I selected the data from the multipage database and transfered it to Open Office. After cleaning up the formatting, I saved the resulting files to a CSV format. The files I created are available on GitHub [here](https://github.com/dbouquin/IS_608/tree/master/NanosatDB_munging/mergeme). I used Open Office because there was no simple alternative for cleaning up the files quickly. The Nanosatellite Database has no export features and was proving inefficient to scrape.
    
 Below are the simple steps for combining the datasets I gathered into more useful structures for assignments
    
@@ -24,6 +26,5 @@ colnames(all_sats_data) <- c("Mission_Name", "Organization", "Organization_Type"
 
 write.csv(all_sats_data, "all_sats.csv")
 
-# still need to tackle the dates...
 str(all_sats_data)
 ```
