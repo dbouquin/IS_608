@@ -9,22 +9,22 @@ output: html_document
 
 I pulled data from Radius Space's [Nanosatellite Database](www.nanosats.eu) on April 20, 2016. To do so, I selected the data from the multipage database and transfered it to Open Office. After cleaning up the formatting, I saved the resulting files to a CSV format. The files I created are available on GitHub [here](https://github.com/dbouquin/IS_608/tree/master/NanosatDB_munging/mergeme). I used Open Office because there was no simple alternative for cleaning up the files quickly. The Nanosatellite Database has no export features and was proving inefficient to scrape.
    
-Below are the simple steps for combining the datasets I gathered into more useful structures for assignments
+Below are the simple steps for combining the datasets I gathered into a more useful structure for data visualization.
    
 ```{r warning=FALSE}
 # Create a single CSV containing all the data I pulled
 
-# First, place all files that need to be merged into a merge folder (e.g. "mergeme") and set the working directory to that folder
+# First, I placed all files that need to be merged into a merge folder (e.g. "mergeme") and set the working directory to that folder
 setwd("/Users/dainabouquin/Documents/CUNYsps_MS/IS_608_all/IS_608/NanosatDB_munging/mergeme")
 
-# create list of file neames
+# created list of file neames
 filenames=list.files(path="/Users/dainabouquin/Documents/CUNYsps_MS/IS_608_all/IS_608/NanosatDB_munging/mergeme", full.names=TRUE)
-# use lapply to apply read.csv() to the list
+# used lapply to apply read.csv() to the list
 all_sats_data <- do.call("rbind", lapply(filenames, read.csv, header = FALSE))
-# add column headers
+# added column headers
 colnames(all_sats_data) <- c("Mission_Name", "Organization", "Organization_Type", "Nation", "Sat_Type", "Launch_Year", "Rocket", "Orbit", "Mission_Type")
 
 write.csv(all_sats_data, "all_sats.csv")
-
-str(all_sats_data)
 ```
+
+The all_sats.csv file is available on GitHub [here](https://github.com/dbouquin/IS_608/blob/master/NanosatDB_munging/all_sats.csv) and is further manipulated for visualization purposes here.
