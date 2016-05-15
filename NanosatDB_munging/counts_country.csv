@@ -1,0 +1,165 @@
+"","Year","Country","Region","Count"
+"1",1998,"Germany","Europe",2
+"2",2000,"Sweden","Europe",1
+"3",2000,"US","North America",9
+"4",2002,"US","North America",2
+"5",2003,"Brazil","South America",1
+"6",2003,"Canada","North America",1
+"7",2003,"Denmark","Europe",2
+"8",2003,"Japan","Asia",2
+"9",2003,"US","North America",1
+"10",2005,"Germany","Europe",1
+"11",2005,"Japan","Asia",1
+"12",2005,"Norway","Europe",1
+"13",2005,"Russia","Asia",1
+"14",2006,"Italy","Europe",1
+"15",2006,"Japan","Asia",3
+"16",2006,"Norway","Europe",1
+"17",2006,"South Korea","Asia",1
+"18",2006,"US","North America",16
+"19",2007,"Argentina","South America",1
+"20",2007,"China","Asia",1
+"21",2007,"Colombia","South America",1
+"22",2007,"US","North America",6
+"23",2008,"Canada","North America",2
+"24",2008,"Denmark","Europe",1
+"25",2008,"Germany","Europe",1
+"26",2008,"Japan","Asia",2
+"27",2008,"Netherlands","Europe",1
+"28",2008,"US","North America",3
+"29",2009,"Germany","Europe",2
+"30",2009,"Japan","Asia",4
+"31",2009,"Switzerland","Europe",1
+"32",2009,"Turkey","Asia",1
+"33",2009,"US","North America",6
+"34",2010,"China","Asia",2
+"35",2010,"India","Asia",1
+"36",2010,"Japan","Asia",3
+"37",2010,"Norway","Europe",1
+"38",2010,"Switzerland","Europe",1
+"39",2010,"US","North America",11
+"40",2011,"India","Asia",2
+"41",2011,"US","North America",10
+"42",2012,"China","Asia",1
+"43",2012,"France","Europe",1
+"44",2012,"Hungary","Europe",1
+"45",2012,"Italy","Europe",2
+"46",2012,"Japan","Asia",4
+"47",2012,"Poland","Europe",1
+"48",2012,"Romania","Europe",1
+"49",2012,"Spain","Europe",1
+"50",2012,"US","North America",12
+"51",2012,"Vietnam","Asia",1
+"52",2013,"Argentina","South America",2
+"53",2013,"Austria","Europe",2
+"54",2013,"Denmark","Europe",2
+"55",2013,"Ecuador","South America",2
+"56",2013,"Estonia","Europe",1
+"57",2013,"Germany","Europe",6
+"58",2013,"Japan","Asia",1
+"59",2013,"Netherlands","Europe",2
+"60",2013,"Norway","Europe",1
+"61",2013,"Pakistan","Asia",1
+"62",2013,"Peru","South America",2
+"63",2013,"Poland","Europe",1
+"64",2013,"Singapore","Asia",1
+"65",2013,"South Africa","Africa",1
+"66",2013,"South Korea","Asia",3
+"67",2013,"Spain","Europe",2
+"68",2013,"Turkey","Asia",1
+"69",2013,"UK","Europe",2
+"70",2013,"US","North America",53
+"71",2013,"Vietnam","Asia",1
+"72",2014,"Belgium","Europe",2
+"73",2014,"Brazil","South America",1
+"74",2014,"Canada","North America",4
+"75",2014,"Denmark","Europe",2
+"76",2014,"Iraq","Middle East",1
+"77",2014,"Israel","Asia",1
+"78",2014,"Italy","Europe",1
+"79",2014,"Japan","Asia",6
+"80",2014,"Lithuania","Europe",2
+"81",2014,"Norway","Europe",1
+"82",2014,"Peru","South America",2
+"83",2014,"Poland","Europe",1
+"84",2014,"Russia","Asia",2
+"85",2014,"Singapore","Asia",3
+"86",2014,"Taiwan","Asia",1
+"87",2014,"UK","Europe",1
+"88",2014,"Ukraine","Europe",1
+"89",2014,"Uruguay","South America",1
+"90",2014,"US","North America",109
+"91",2015,"Brazil","South America",2
+"92",2015,"Canada","North America",1
+"93",2015,"China","Asia",17
+"94",2015,"Denmark","Europe",2
+"95",2015,"Italy","Europe",1
+"96",2015,"Japan","Asia",1
+"97",2015,"Singapore","Asia",2
+"98",2015,"UK","Europe",1
+"99",2015,"US","North America",101
+"100",2016,"Argentina","South America",1
+"101",2016,"Australia","Oceania",4
+"102",2016,"Austria","Europe",1
+"103",2016,"Belgium","Europe",3
+"104",2016,"Brazil","South America",4
+"105",2016,"Bulgaria","Europe",1
+"106",2016,"Canada","North America",3
+"107",2016,"China","Asia",7
+"108",2016,"Czech","Europe",3
+"109",2016,"Denmark","Europe",1
+"110",2016,"Dubai","Middle East",1
+"111",2016,"Finland","Europe",3
+"112",2016,"France","Europe",5
+"113",2016,"Germany","Europe",4
+"114",2016,"Greece","Europe",2
+"115",2016,"India","Asia",6
+"116",2016,"Israel","Asia",5
+"117",2016,"Italy","Europe",4
+"118",2016,"Japan","Asia",8
+"119",2016,"Latvia","Europe",1
+"120",2016,"Lithuania","Europe",1
+"121",2016,"Mexico","North America",1
+"122",2016,"Netherlands","Europe",2
+"123",2016,"Norway","Europe",2
+"124",2016,"Pakistan","Asia",1
+"125",2016,"Poland","Europe",1
+"126",2016,"Portugal","Europe",1
+"127",2016,"Romania","Europe",2
+"128",2016,"Russia","Asia",4
+"129",2016,"Slovakia","Europe",1
+"130",2016,"South Africa","Africa",1
+"131",2016,"South Korea","Asia",8
+"132",2016,"Spain","Europe",3
+"133",2016,"Sweden","Europe",2
+"134",2016,"Taiwan","Asia",1
+"135",2016,"Turkey","Asia",2
+"136",2016,"UK","Europe",5
+"137",2016,"Ukraine","Europe",1
+"138",2016,"US","North America",350
+"139",2016,"Vietnam","Asia",1
+"140",2017,"Australia","Oceania",1
+"141",2017,"Costa Rica","North America",1
+"142",2017,"Finland","Europe",1
+"143",2017,"France","Europe",2
+"144",2017,"Germany","Europe",6
+"145",2017,"Hungary","Europe",1
+"146",2017,"Russia","Asia",1
+"147",2017,"Slovenia","Europe",1
+"148",2017,"Sweden","Europe",1
+"149",2017,"Switzerland","Europe",1
+"150",2017,"UK","Europe",1
+"151",2017,"US","North America",13
+"152",2018,"Australia","Oceania",2
+"153",2018,"France","Europe",3
+"154",2018,"Germany","Europe",1
+"155",2018,"Italy","Europe",1
+"156",2018,"Switzerland","Europe",2
+"157",2018,"Taiwan","Asia",1
+"158",2018,"US","North America",21
+"159",2019,"Bulgaria","Europe",1
+"160",2019,"India","Asia",1
+"161",2020,"Australia","Oceania",4
+"162",2020,"France","Europe",2
+"163",2020,"Switzerland","Europe",1
+"164",2021,"France","Europe",5
