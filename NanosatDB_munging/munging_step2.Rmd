@@ -50,20 +50,20 @@ clean_sats <- read.csv("clean_all_sats.csv", na.strings = "NA")
 # Created a toy example for help on StackOverflow
 # http://stackoverflow.com/questions/37231241/new-column-from-non-standard-date-factor-in-r/37231268#37231268
 
-org <- c("a","b","c","d")
-country <- c("1","2","3","4")
-date <- c("01-09-14","01-10-07","11-30-99","10-31-12")
-toy <- data.frame(cbind(org,country,date))
-toy
+# org <- c("a","b","c","d")
+# country <- c("1","2","3","4")
+# date <- c("01-09-14","01-10-07","11-30-99","10-31-12")
+# toy <- data.frame(cbind(org,country,date))
+# toy
 
 # regex solution
-v1 <- sub(".*-", "", toy$date)
-toy$Year <- ifelse(as.numeric(v1) > 50, paste0("19", v1), paste0(20, v1))
-toy$Year
-toy
+# v1 <- sub(".*-", "", toy$date)
+# toy$Year <- ifelse(as.numeric(v1) > 50, paste0("19", v1), paste0(20, v1))
+# toy$Year
+# toy
 
 # datetime solution
-transform(toy,Year=format(strptime(date,"%m-%d-%y"),"%Y"))
+# transform(toy,Year=format(strptime(date,"%m-%d-%y"),"%Y"))
 
 # apply solution to whole dataset
 clean_sats$Year <- transform(clean_sats,Year=format(strptime(Launch_Year,"%m-%d-%y"),"%Y"))
@@ -72,15 +72,11 @@ clean_sats$Year <- transform(clean_sats,Year=format(strptime(Launch_Year,"%m-%d-
 # v1 <- sub(".*-", "", clean_sats$Launch_Year)
 # clean_sats$Year <- ifelse(as.numeric(v1) > 50, paste0("19", v1), paste0(20, v1))
 
-# Now I'll drop the columns I no longer need and rename them
+# drop unnecessary cols and write to csv 
+final <- clean_sats$Year
+final[1:2] <- list(NULL)
 
-clean_sats[1:2] <- list(NULL)
-clean_sats[6] <- list(NULL)
-clean_sats[10:21] <- list(NULL)
+write.csv(final, "final_sats.csv")
 
-# create the final file
-final_sats <- clean_sats
-write.csv(final_sats, "final_sats.csv")
-
-# minor edits to "region" column done with Open Office - changed any NAs to appropriate region name
+# minor edits to "region" column done with Open Office - changed a few remaining NAs to appropriate region name
 ```
