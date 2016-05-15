@@ -196,7 +196,7 @@
 195,"GOMX-1 (GATOSS, Global Air Traffic Awareness and Optimizing through Spaceborne Surveillance)",GomSpace ApS,Company,Denmark,2U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Europe,2013
 196,HiNCube,Narvik University College,University,Norway,1U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Europe,2013
 197,HumSat-D,University of Vigo,University,Spain,1U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Europe,2013
-198,ICUBE-1,Islamabad Institute of Science and Technology,Institute,Pakistan,1U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Asia,2013
+198,ICUBE-1,Islamabad Institute of Science and Technology,Institute,Pakistan,1U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Middle East,2013
 199,"MOVE (First-MOVE, Munich Orbital Verification Experiment)",Technical University of München,University,Germany,1U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Europe,2013
 200,NEE-02 Krysaor,Ecuadorian Space Agency,Agency,Ecuador,1U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,South America,2013
 201,OPTOS (Optical Nanosatellite),National Institute of Aerospace Technology,Agency,Spain,3U,11-21-13,Dnepr,"670 km, 97.79 degree inclination.",Space Technology,Europe,2013
@@ -519,7 +519,7 @@
 517,Lemur-2 8,Spire,Company,US,3U,03-23-16,Atlas V,ISS,Space Activity,North America,2016
 518,Lemur-2 9,Spire,Company,US,3U,03-23-16,Atlas V,ISS,Space Activity,North America,2016
 519,ITASAT 1,Technological Institute of Aeronautics,University,Brazil,6U,03-31-16,-0,not launched,Space Technology,South America,2016
-520,Nayif-1,Emirates Institution for Advanced Science and Technology,Institute,Dubai,1U,03-31-16,"Falcon 9, SHERPA",not launched,Space Technology,Middle East,2016
+520,Nayif-1,Emirates Institution for Advanced Science and Technology,Institute,United Arab Emirates,1U,03-31-16,"Falcon 9, SHERPA",not launched,Space Technology,Middle East,2016
 521,OUFTI-1,University of Liège,University,Belgium,1U,04-22-16,Sojuz,not launched,Space Technology,Europe,2016
 522,AAUSAT4,Aalborg University,University,Denmark,1U,04-22-16,Sojuz,not launched,Space Technology,Europe,2016
 523,e-st@r-II,Polytechnic University of Turin,University,Italy,1U,04-22-16,Sojuz,not launched,Space Technology,Europe,2016
@@ -738,7 +738,7 @@
 736,Flock-2x xx,Planet Labs,Company,US,3U,12-31-16,not launched,not launched,Space Activity,North America,2016
 737,Flock-2x xx,Planet Labs,Company,US,3U,12-31-16,not launched,not launched,Space Activity,North America,2016
 738,R2S,University of North Dakota,University,US,1U,12-31-16,TBD,TBD,Space Technology,North America,2016
-739,PNSS-1 (Pakistan National Student Satellite),"SUPARCO (Pakistan Space & Upper Atmoshpere Research Comission, Space Agency of Pakistan",Agency,Pakistan,3U,12-31-16,-0,-0,Space Technology,Asia,2016
+739,PNSS-1 (Pakistan National Student Satellite),"SUPARCO (Pakistan Space & Upper Atmoshpere Research Comission, Space Agency of Pakistan",Agency,Pakistan,3U,12-31-16,-0,-0,Space Technology,Middle East,2016
 740,FREEDOM,Tohoku University,University,Japan,1U,12-31-16,H-2B,not launched,Space Technology,Asia,2016
 741,Flock-2x xx,Planet Labs,Company,US,3U,12-31-16,not launched,not launched,Space Activity,North America,2016
 742,Flock-2x xx,Planet Labs,Company,US,3U,12-31-16,not launched,not launched,Space Activity,North America,2016
