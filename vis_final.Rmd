@@ -1,0 +1,73 @@
+---
+title: "Small Satelite Launches Worldwide"
+author: "Daina Bouquin"
+output: html_document
+---
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+#setup
+library(plotly)
+devtools::install_github("ropensci/plotly")
+library(plyr)
+
+# read in the pre-cleaned data from the web
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/final_sats.csv", "final_sats.csv", method="curl")
+final_sats <- read.csv("final_sats.csv", na.strings = "NA")
+
+# do final manipulations for plotting and write to csv
+counts_country <- ddply(final_sats, .(final_sats$Year, final_sats$Nation, final_sats$region), nrow)
+colnames(counts_country) <- c("Year", "Country", "Region", "Count")
+write.csv(counts_country, "counts_country.csv")
+
+# plot in 2 rows
+plot <- ggplot(data = counts_country, aes(x = Year, y = Count, color = Region, text = paste("country:", Country))) +
+  geom_point(size= 2, alpha = (1/2)) + 
+  facet_wrap(~ Region, nrow = 2)
+
+f <- list(
+  family = "sans-serif",
+  size = 14,
+  color = "#000"
+)
+l <- list(
+  font = f,
+  bgcolor = "#E2E2E2",
+  bordercolor = "#FFFFFF",
+  borderwidth = 2
+)
+```
+```{r, echo= FALSE, message = FALSE}
+(gg_plot <- ggplotly(plot) %>% layout(autosize = F, width = 900, height = 550, legend = l) %>% layout(xaxis = f, yaxis = f))
+```
+```{r, echo=FALSE, message = FALSE}
+# Send the plot to be hosted on Plotly 
+# embed code will be used on personal website to show final result
+
+# plotly_POST(gg_plot, filename="gg_plot", sharing="secret")
+```
+
+```{r, echo=FALSE}
+# Pull funding data from GitHub.
+# previously cleaned for D3 assignment
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/type_count.csv", "type_count.csv", method="curl")
+type_count <- read.csv("type_count.csv", na.strings = "NA")
+type_count <- type_count[order(type_count$freq),]
+
+Type <- type_count$Organization_Type
+LaunchCount <- type_count$freq 
+
+bars <- plot_ly(
+  x = Type,
+  y = LaunchCount,
+  type = "bar"
+)
+```
+
+```{r, echo=FALSE}
+# Plot the funder counts (all launches, date or no)
+bars  %>% layout(autosize = F, width = 800, height = 650, legend = l) %>% layout(xaxis = f, yaxis = f)
+```
+
+```{r}
+#plotly_POST(bars, filename="bar_plot", sharing="public")
+```
