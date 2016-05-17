@@ -4,7 +4,9 @@ author: "Daina Bouquin"
 output: html_document
 ---
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE}
+Final plots and write up can be found on my personal blog [here](http://dainabouquin.com/608_final/). Within each plot you can re-scale, zoom, and more using the toolbar at the top.   
+----------------        
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
 #setup
 library(plotly)
 devtools::install_github("ropensci/plotly")
@@ -45,15 +47,16 @@ l <- list(
   borderwidth = 2
 )
 ```
-```{r, echo= FALSE, message = FALSE}
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
 (gg_plot <- ggplotly(plot) %>% layout(autosize = F, width = 900, height = 550, legend = l) %>% layout(xaxis = f, yaxis = f))
 ```
-```{r, echo=FALSE, message = FALSE}
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
 # Send the plot to be hosted on Plotly 
 # embed code will be used on personal website to show final result
 # plotly_POST(gg_plot, filename="gg_plot", sharing="public")
 ```
-
+    
+       
 ```{r, echo=FALSE, warning = FALSE}
 # Bar plot for Org type
 # Data from GitHub again
@@ -67,12 +70,13 @@ colnames(counts_org_type) <- c("Country", "Region", "Org_Type", "Count")
 # Write record as "unknown"
 counts_org_type$Org_Type <- gsub("-0", "Unknown", counts_org_type$Org_Type)
 ```
-```{r, echo= FALSE, message = FALSE}
+    
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
 # Create bar chart by region and type of organization
 bars <- counts_org_type %>% plot_ly(x = Region, y = Count, type = "bar", color = Org_Type, colors = "Paired", text = paste(Org_Type,":", Count), hoverinfo = "text")
 bars %>% layout(autosize = F, width = 900, height = 550, legend = list(x = .8, y = .6)) %>% layout(xaxis = f, yaxis = f)
 ```
-```{r, warning=FALSE, message = FALSE}
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
 # Again push to plotly to get embed codes
 # plotly_POST(bars, filename="bar_plot", sharing="public")
 ```
