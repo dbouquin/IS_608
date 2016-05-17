@@ -9,6 +9,10 @@ output: html_document
 library(plotly)
 devtools::install_github("ropensci/plotly")
 library(plyr)
+library(dplyr)
+Sys.setenv("plotly_username"="dbouquin")
+Sys.setenv("plotly_api_key"="m80wxbo7xf")
+library(RColorBrewer)
 
 # read in the pre-cleaned data from the web
 download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/final_sats.csv", "final_sats.csv", method="curl")
@@ -29,8 +33,13 @@ f <- list(
   size = 14,
   color = "#000"
 )
+f2 <- list(
+  family = "sans-serif",
+  size = 10,
+  color = "#000"
+)
 l <- list(
-  font = f,
+  font = f2,
   bgcolor = "#E2E2E2",
   bordercolor = "#FFFFFF",
   borderwidth = 2
@@ -42,32 +51,26 @@ l <- list(
 ```{r, echo=FALSE, message = FALSE}
 # Send the plot to be hosted on Plotly 
 # embed code will be used on personal website to show final result
-
-# plotly_POST(gg_plot, filename="gg_plot", sharing="secret")
+plotly_POST(gg_plot, filename="gg_plot", sharing="public")
 ```
 
-```{r, echo=FALSE}
-# Pull funding data from GitHub.
-# previously cleaned for D3 assignment
-download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/type_count.csv", "type_count.csv", method="curl")
-type_count <- read.csv("type_count.csv", na.strings = "NA")
-type_count <- type_count[order(type_count$freq),]
+```{r, echo=FALSE, warning = FALSE}
+# Bar plot for Org type
+# Data from GitHub again
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/final_sats.csv", "final_sats.csv", method="curl")
+final_sats <- read.csv("final_sats.csv", na.strings = "NA")
 
-Type <- type_count$Organization_Type
-LaunchCount <- type_count$freq 
-
-bars <- plot_ly(
-  x = Type,
-  y = LaunchCount,
-  type = "bar"
-)
+# Process for plotting
+counts_org_type <- ddply(final_sats, .(final_sats$Nation, final_sats$region, final_sats$Organization_Type), nrow)
+colnames(counts_org_type) <- c("Country", "Region", "Org_Type", "Count")
+# Identified record with unknown Org_Type: -0 
+# Write record as "unknown"
+counts_org_type$Org_Type <- gsub("-0", "Unknown", counts_org_type$Org_Type)
 ```
-
-```{r, echo=FALSE}
-# Plot the funder counts (all launches, date or no)
-bars  %>% layout(autosize = F, width = 800, height = 650, legend = l) %>% layout(xaxis = f, yaxis = f)
+```{r, echo= FALSE, message = FALSE}
+bars <- counts_org_type %>% plot_ly(x = Region, y = Count, type = "bar", color = Org_Type, colors = "Paired", text = paste(Org_Type,":", Count), hoverinfo = "text")
+bars %>% layout(autosize = F, width = 900, height = 550, legend = list(x = .8, y = .6)) %>% layout(xaxis = f, yaxis = f)
 ```
-
-```{r}
-#plotly_POST(bars, filename="bar_plot", sharing="public")
+```{r, warning=FALSE, message = FALSE}
+plotly_POST(bars, filename="bar_plot", sharing="public")
 ```
