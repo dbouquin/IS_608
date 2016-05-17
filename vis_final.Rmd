@@ -51,7 +51,7 @@ l <- list(
 ```{r, echo=FALSE, message = FALSE}
 # Send the plot to be hosted on Plotly 
 # embed code will be used on personal website to show final result
-plotly_POST(gg_plot, filename="gg_plot", sharing="public")
+# plotly_POST(gg_plot, filename="gg_plot", sharing="public")
 ```
 
 ```{r, echo=FALSE, warning = FALSE}
@@ -68,9 +68,11 @@ colnames(counts_org_type) <- c("Country", "Region", "Org_Type", "Count")
 counts_org_type$Org_Type <- gsub("-0", "Unknown", counts_org_type$Org_Type)
 ```
 ```{r, echo= FALSE, message = FALSE}
+# Create bar chart by region and type of organization
 bars <- counts_org_type %>% plot_ly(x = Region, y = Count, type = "bar", color = Org_Type, colors = "Paired", text = paste(Org_Type,":", Count), hoverinfo = "text")
 bars %>% layout(autosize = F, width = 900, height = 550, legend = list(x = .8, y = .6)) %>% layout(xaxis = f, yaxis = f)
 ```
 ```{r, warning=FALSE, message = FALSE}
-plotly_POST(bars, filename="bar_plot", sharing="public")
+# Again push to plotly to get embed codes
+# plotly_POST(bars, filename="bar_plot", sharing="public")
 ```
