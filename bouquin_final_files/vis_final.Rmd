@@ -1,0 +1,80 @@
+---
+title: "Small Satelite Launches Worldwide"
+author: "Daina Bouquin"
+output: html_document
+---
+
+Final plots and write up can be found on my personal blog [here](http://dainabouquin.com/608_final/). Within each plot you can re-scale, zoom, and more using the toolbar at the top.   
+   
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
+#setup
+library(plotly)
+devtools::install_github("ropensci/plotly")
+library(plyr)
+library(dplyr)
+Sys.setenv("plotly_username"="dbouquin")
+Sys.setenv("plotly_api_key"="m80wxbo7xf")
+library(RColorBrewer)
+
+# read in the pre-cleaned data from the web
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/final_sats.csv", "final_sats.csv", method="curl")
+final_sats <- read.csv("final_sats.csv", na.strings = "NA")
+
+# do final manipulations for plotting and write to csv
+counts_country <- ddply(final_sats, .(final_sats$Year, final_sats$Nation, final_sats$region), nrow)
+colnames(counts_country) <- c("Year", "Country", "Region", "Count")
+write.csv(counts_country, "counts_country.csv")
+
+# plot in 2 rows
+plot <- ggplot(data = counts_country, aes(x = Year, y = Count, color = Region, text = paste("country:", Country))) +
+  geom_point(size= 2, alpha = (1/2)) + 
+  facet_wrap(~ Region, nrow = 2)
+
+f <- list(
+  family = "sans-serif",
+  size = 14,
+  color = "#000"
+)
+f2 <- list(
+  family = "sans-serif",
+  size = 10,
+  color = "#000"
+)
+l <- list(
+  font = f2,
+  bgcolor = "#E2E2E2",
+  bordercolor = "#FFFFFF",
+  borderwidth = 2
+)
+```
+```{r,  message = FALSE, warning=FALSE}
+(gg_plot <- ggplotly(plot) %>% layout(autosize = F, width = 900, height = 550, legend = l) %>% layout(xaxis = f, yaxis = f))
+```
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
+# Send the plot to be hosted on Plotly 
+# embed code will be used on personal website to show final result
+# plotly_POST(gg_plot, filename="gg_plot", sharing="public")
+```
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+# Bar plot for Org type
+# Data from GitHub again
+download.file("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/final_sats.csv", "final_sats.csv", method="curl")
+final_sats <- read.csv("final_sats.csv", na.strings = "NA")
+
+# Process for plotting
+counts_org_type <- ddply(final_sats, .(final_sats$Nation, final_sats$region, final_sats$Organization_Type), nrow)
+colnames(counts_org_type) <- c("Country", "Region", "Org_Type", "Count")
+# Identified record with unknown Org_Type: -0 
+# Write record as "unknown"
+counts_org_type$Org_Type <- gsub("-0", "Unknown", counts_org_type$Org_Type)
+```
+    
+```{r, message = FALSE, warning=FALSE}
+# Create bar chart by region and type of organization
+bars <- counts_org_type %>% plot_ly(x = Region, y = Count, type = "bar", color = Org_Type, colors = "Paired", text = paste(Org_Type,":", Count), hoverinfo = "text")
+bars %>% layout(autosize = F, width = 900, height = 550, legend = list(x = .8, y = .6)) %>% layout(xaxis = f, yaxis = f)
+```
+```{r, echo= FALSE, message = FALSE, warning=FALSE}
+# Again push to plotly to get embed codes
+# plotly_POST(bars, filename="bar_plot", sharing="public")
+```
