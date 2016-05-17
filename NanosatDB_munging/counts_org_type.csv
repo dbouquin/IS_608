@@ -1,0 +1,103 @@
+,Country,Region,Org_Type,Count
+1,Argentina,South America,Company,2
+2,Argentina,South America,Independent,1
+3,Argentina,South America,University,1
+4,Australia,Oceania,Military,8
+5,Australia,Oceania,University,3
+6,Austria,Europe,University,3
+7,Belgium,Europe,Institute,4
+8,Belgium,Europe,University,1
+9,Brazil,South America,Institute,2
+10,Brazil,South America,School,1
+11,Brazil,South America,University,5
+12,Bulgaria,Europe,Company,2
+13,Canada,North America,Agency,2
+14,Canada,North America,Company,1
+15,Canada,North America,University,8
+16,China,Asia,Company,1
+17,China,Asia,Institute,3
+18,China,Asia,Non-profit,5
+19,China,Asia,University,19
+20,Colombia,South America,University,1
+21,Costa Rica,North America,University,1
+22,Czech,Europe,Company,1
+23,Czech,Europe,Institute,1
+24,Czech,Europe,University,1
+25,Denmark,Europe,Company,3
+26,Denmark,Europe,University,7
+27,Ecuador,South America,Agency,2
+28,Estonia,Europe,University,1
+29,Finland,Europe,Company,1
+30,Finland,Europe,University,3
+31,France,Europe,Agency,1
+32,France,Europe,Institute,1
+33,France,Europe,University,16
+34,Germany,Europe,Agency,1
+35,Germany,Europe,Company,1
+36,Germany,Europe,University,21
+37,Greece,Europe,University,2
+38,Hungary,Europe,University,2
+39,India,Asia,University,10
+40,Iraq,Middle East,University,1
+41,Israel,Asia,Company,1
+42,Israel,Asia,School,2
+43,Israel,Asia,University,3
+44,Italy,Europe,Company,3
+45,Italy,Europe,School,1
+46,Italy,Europe,University,6
+47,Japan,Asia,Company,2
+48,Japan,Asia,University,33
+49,Latvia,Europe,University,1
+50,Lithuania,Europe,Company,1
+51,Lithuania,Europe,Institute,1
+52,Lithuania,Europe,University,1
+53,Mexico,North America,University,1
+54,Netherlands,Europe,Company,1
+55,Netherlands,Europe,University,4
+56,Norway,Europe,Agency,1
+57,Norway,Europe,University,6
+58,Pakistan,Middle East,Agency,1
+59,Pakistan,Middle East,Institute,1
+60,Peru,South America,University,4
+61,Poland,Europe,Institute,2
+62,Poland,Europe,University,2
+63,Portugal,Europe,University,1
+64,Romania,Europe,Agency,2
+65,Romania,Europe,University,1
+66,Russia,Asia,Company,2
+67,Russia,Asia,Institute,1
+68,Russia,Asia,University,5
+69,Singapore,Asia,Company,1
+70,Singapore,Asia,University,5
+71,Slovakia,Europe,Non-profit,1
+72,Slovenia,Europe,Company,1
+73,South Africa,Africa,University,2
+74,South Korea,Asia,Individual,1
+75,South Korea,Asia,Institute,1
+76,South Korea,Asia,University,10
+77,Spain,Europe,Agency,1
+78,Spain,Europe,Company,1
+79,Spain,Europe,University,4
+80,Sweden,Europe,Agency,1
+81,Sweden,Europe,University,3
+82,Switzerland,Europe,University,6
+83,Taiwan,Asia,University,3
+84,Turkey,Asia,University,4
+85,UK,Europe,Agency,3
+86,UK,Europe,Company,1
+87,UK,Europe,Non-profit,1
+88,UK,Europe,University,5
+89,Ukraine,Europe,University,2
+90,United Arab Emirates,Middle East,Institute,1
+91,Uruguay,South America,University,1
+92,US,North America,Not Known,7
+93,US,North America,Agency,45
+94,US,North America,Company,448
+95,US,North America,Institute,10
+96,US,North America,Military,51
+97,US,North America,Non-profit,19
+98,US,North America,School,6
+99,US,North America,University,137
+100,Vietnam,Asia,Agency,1
+101,Vietnam,Asia,Institute,1
+102,Vietnam,Asia,University,1
