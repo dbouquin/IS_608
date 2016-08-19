@@ -49,6 +49,14 @@ l <- list(
 ```
 ```{r,  message = FALSE, warning=FALSE}
 (gg_plot <- ggplotly(plot) %>% layout(autosize = F, width = 900, height = 550, legend = l) %>% layout(xaxis = f, yaxis = f))
+
+### all launches bar graph for IMLS proposal
+counts_all <- data.frame(counts_country$Year, counts_country$Count)
+counts_all_2016 <- counts_all[!(counts_all$counts_country.Year > 2016),]
+counts_all_agg <- aggregate(counts_all_2016$counts_country.Count, by=list(Category=counts_all_2016$counts_country.Year), FUN=sum)
+
+total_plot <- ggplot(counts_all_agg, aes(x = factor(Category), y = x)) + geom_bar(stat = "identity", fill = "darkblue") + ggtitle("Small Satellite Launches Globally per Year") + xlab("Year") + ylab("Count")
+total_plot
 ```
 ```{r, echo= FALSE, message = FALSE, warning=FALSE}
 # Send the plot to be hosted on Plotly 
